@@ -1,4 +1,14 @@
 // eslint-disable-next-line vue/multi-word-component-names
+
+
+<!-- ['number_of_waste_bags', 'number_of_waste_bags'],
+['number_of_waste_bags', 'handout_gloves'],
+['number_of_waste_bags', 'handout_wastebags'],
+ -->
+
+
+
+
 <template>
   <div>
     <div ref="chart" style="width: 100%; height: 400px;"></div>

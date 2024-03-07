@@ -1,48 +1,39 @@
+<template>
+  <div id="map-container">
+    <Norway_heatmap></Norway_heatmap>
+    <Norway_scattermap></Norway_scattermap>
+  </div>
+</template>
 
-  <template>
-    <div>
-      <Norway_heatmap></Norway_heatmap>
-      <Norway_scattermap></Norway_scattermap>
-    </div>
-  </template>
-  
-  
-  <script>
-  import Papa_parse from "@/components/papa_parse";
-  import Norway_godownmap from "@/components/Norway_godownmap";
-  import Norway_scattermap from "@/components/norway_scattermap";
-  import GMapTest from "@/components/gMapTest";
-  import BmapScatter from "@/components/BmapScatter";
-  import Norway_heatmap from "@/components/norway_heatmap";
-  export default {
-    name: 'App',
-    components: {
-      // eslint-disable-next-line vue/no-unused-components
-      Norway_heatmap,
-      // eslint-disable-next-line vue/no-unused-components
-      BmapScatter,
-      // eslint-disable-next-line vue/no-unused-components
-      GMapTest,
-      // eslint-disable-next-line vue/no-unused-components
-      Norway_scattermap,
-      // eslint-disable-next-line vue/no-unused-components
-      Norway_godownmap,
-      // eslint-disable-next-line vue/no-unused-components
-      // eslint-disable-next-line vue/no-unused-components
-      Papa_parse,
-  
-    }
+<script>
+import CanvasNest from 'canvas-nest.js';
+import Norway_heatmap from "@/components/norway_heatmap";
+import Norway_scattermap from "@/components/norway_scattermap";
+
+const config = {
+  color: '64, 158, 255', // 线条颜色
+  pointColor: '64, 158, 255', // 节点颜色
+  opacity: 0.5, // 线条透明度
+  count: 500, // 线条数量
+  zIndex: -1 // 画面层级
+};
+
+export default {
+  name: 'App',
+  components: {
+    Norway_heatmap,
+    Norway_scattermap,
+  },
+  mounted() {
+    new CanvasNest(document.getElementById('map-container'), config);
   }
-  </script>
-  
-  <style>
-  #app {
-    /*font-family: Avenir, Helvetica, Arial, sans-serif;*/
-    /*-webkit-font-smoothing: antialiased;*/
-    /*-moz-osx-font-smoothing: grayscale;*/
-    /*text-align: center;*/
-    /*color: #2c3e50;*/
-    /*margin-top: 60px;*/
-  }
-  </style>
-  
+}
+</script>
+
+<style>
+#map-container {
+  position: absolute;
+  top: 15%;
+  left: 20%; /* 向右移动 20px */
+}
+</style>

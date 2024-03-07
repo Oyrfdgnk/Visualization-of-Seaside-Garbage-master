@@ -1,3 +1,5 @@
+// teiner oljefat  fulle_soppelbotter  avfallsstasjon  kloakkutslipp dumpet_avfall 
+
 <template>
   <div>
     <input type="file" @change="handleFileUpload" accept=".csv" />
@@ -20,8 +22,7 @@ export default {
         avfallsstasjon: 0,
         kloakkutslipp: 0,
         dumpet_avfall: 0
-      },
-      
+      }
     };
   },
   methods: {
@@ -44,26 +45,24 @@ export default {
           this.data = result.data;
           this.computeCategoryCounts();
           this.drawChart();
-        },
+        }
       });
     },
     computeCategoryCounts() {
-      this.categoryCounts = {
-        teiner: 0,
-        oljefat: 0,
-        fulle_soppelbotter: 0,
-        avfallsstasjon: 0,
-        kloakkutslipp: 0,
-        dumpet_avfall: 0
-      };
-    
-
+      this.resetCategoryCounts(); // 重置计数器
+      
       this.data.forEach((row) => {
         for (const category in this.categoryCounts) {
           if (row[category]) {
             this.categoryCounts[category] += row[category];
           }
         }
+      });
+    },
+    resetCategoryCounts() {
+      // 重置分类计数
+      Object.keys(this.categoryCounts).forEach((key) => {
+        this.categoryCounts[key] = 0;
       });
     },
     drawChart() {

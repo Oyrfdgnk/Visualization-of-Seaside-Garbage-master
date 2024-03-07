@@ -1,3 +1,5 @@
+//startdate kg_of_collected_waste 
+
 <template>
     <div>
       <input type="file" @change="handleFileUpload" accept=".csv" />

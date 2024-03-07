@@ -1,7 +1,18 @@
 <template>
     <div class="echarts">
+
+
         <div style="width:100%;height:100%" ref="allMap"></div>
         <div class="mapChoose">
+
+              
+
+            <!-- 1 -->
+            <all-map @region-selected="handleRegionSelected"></all-map>
+            <chart4-wrapper :selected-region="selectedRegion"></chart4-wrapper>
+            <!-- 1 -->
+
+            
             <span v-for="(item,index) in parentInfo" :key="item.code">
                 <span class="title" @click="chooseArea(item,index)">{{item.cityName=='全国'?'中国':item.cityName}}</span>
                 <span class="icon" v-show="index+1!=parentInfo.length">></span>
@@ -10,12 +21,16 @@
     </div>
 </template>
 
+
+
 <script>
     import echarts from 'echarts'
     import resize from "./mixins/resize";
+
     export default {
         name: 'allMap',
         mixins: [resize],
+      
         data() {
             return {
                 myCharts: null,
@@ -26,13 +41,22 @@
                     cityName: "全国",
                     code: 100000
                 }],
-                timeTitle: ['2016', '2017', '2018', '2019', '2020']
+                timeTitle: ['2016', '2017', '2018', '2019', '2020'],
+                selectedRegion: null, // 选择的省份
+
             }
         },
         mounted() {
             this.getGeoJson(100000)
         },
         methods: {
+
+            //点击传递
+            onRegionClick(regionName) {
+                this.$emit('region-selected', regionName);
+            },
+
+            //
             getGeoJson(adcode) {
                 let that = this;
                 var AMapUI=window.AMapUI;

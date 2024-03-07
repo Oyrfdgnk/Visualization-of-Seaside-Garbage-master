@@ -1,4 +1,4 @@
-
+//startdate kg_of_collected_waste 
 
 
 <template>
